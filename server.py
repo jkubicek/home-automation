@@ -7,7 +7,7 @@ import BaseHTTPServer
 
 @get('/')
 def home():
-    return '<h1>Welcome</h1><p>Welcome to the Raspberry Pi</p>'
+    return open('html/index.html', 'r')
     
 @post('/switch/on')
 def switchOn():
