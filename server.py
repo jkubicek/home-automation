@@ -1,9 +1,13 @@
 #!/usr/bin/env python
 
-from bottle import get, post, request, route, run, template
+from bottle import get, post, request, route, run
 from subprocess import call
-call(["ls", "-l"])
 import BaseHTTPServer
+
+# HTML Resource Loaders
+
+def redirect_html():
+    return open('html/redirect-to-home.html', 'r')
 
 @get('/')
 def home():
@@ -12,9 +16,11 @@ def home():
 @post('/switch/on')
 def switchOn():
     call(['wemo', 'switch', 'Living Room', 'on'])
+    return redirect_html()
     
 @post('/switch/off')
-def switchOn():
+def switchOff():
     call(['wemo', 'switch', 'Living Room', 'off'])
+    return redirect_html()
 
 run(host='0.0.0.0', debug=True)
